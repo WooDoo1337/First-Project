@@ -13,12 +13,12 @@ head.appendChild(link);
 
 // загрузить HTML
 var body = document.getElementsByTagName('body')[0];
-boxHtml = '
+var boxHtml = `
   <div id="bookmarklet">
     <a href="#" id="close">&times;</a>
     <h1>Select an image to bookmark:</h1>
     <div class="images"></div>
-  </div>';
+  </div>`;
 body.innerHTML += boxHtml;
 
 
@@ -34,6 +34,31 @@ function bookmarkletLaunch() {
                .addEventListener('click', function(){
                  bookmarklet.style.display = 'none'
                });
+
+    // найти изображения в DOM с минимальными размерами
+    images = document.querySelectorAll('img[src$=".jpg"], img[src$=".jpeg"], img[src$=".png"]');
+    images.forEach(image => {
+      if(image.naturalWidth >= minWidth
+        && image.naturalHeight >= minHeight)
+      {
+        var imageFound = document.createElement('img');
+        imageFound.src = image.src;
+        imagesFound.append(imageFound);
+      }
+    })
+
+    // событие выбора изображения
+    imagesFound.querySelectorAll('img').forEach(image => {
+      image.addEventListener('click', function(event){
+        imageSelected = event.target;
+        bookmarklet.style.display = 'none';
+        window.open(siteUrl + 'images/create/?url='
+                    + encodeURIComponent(imageSelected.src)
+                    + '&title='
+                    + encodeURIComponent(document.title),
+                    '_blank');
+      })
+    })
 }
 
 // запустить букмарклет
