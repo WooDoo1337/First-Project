@@ -144,6 +144,9 @@ PASSWORD_HASHERS = [
 MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
+# Easy thumbnails settings
+THUMBNAIL_DEBUG = True
+
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
     'account.authentication.EmailAuthBackend',
