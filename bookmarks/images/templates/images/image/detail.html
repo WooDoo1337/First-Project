@@ -13,7 +13,7 @@
     <div>
       <span class="count">
       <span class="total">{{ total_likes }}</span>
-        {{ total_likes }} like{{ total_likes|pluralize }}
+        like{{ total_likes|pluralize }}
       </span>
       <a href="#" data-id="{{ image.id }}" data-action="{% if request.user in users_like %}un{% endif %}like" class="like button">
         {% if request.user not in users_like %}
@@ -70,11 +70,11 @@
         var action = previousAction === 'like' ? 'unlike' : 'like';
         likeButton.dataset.action = action;
         likeButton.innerHTML = action;
-        
+
         // обновить количество лайков
         var likeCount = document.querySelector('span.count .total');
         var totalLikes = parseInt(likeCount.innerHTML);
-        likeCount.innerHTML = previousAction === 'like' ? totalLikes + 1 : totalLikes – 1;
+        likeCount.innerHTML = previousAction === 'like' ? totalLikes + 1 : totalLikes - 1;
       }
     })
   });
